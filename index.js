@@ -1,82 +1,50 @@
 var boxes = document.getElementsByClassName('box');
+
 var counter = 0;
+
 var gameOver = false;
+
 var messageDiv = document.getElementById('messageDiv');
+
 var theMessage = document.getElementById('theMessage');
+
 var title = document.getElementById('title');
+
 var userLetter = "X";
 
-function changeUser() {
-	userLetter === "X" ? userLetter = "O" : userLetter = "X";
-}
-
 function checkForWin() {
-	var a = {
-		letter: document.getElementById('box1').innerHTML,
-		id: "#box1"
-	}
-
-	var b = {
-		letter: document.getElementById('box2').innerHTML,
-		id: "#box2"
-	}
-
-	var c = {
-		letter: document.getElementById('box3').innerHTML,
-		id: "#box3"
-	}
-
-	var d = {
-		letter: document.getElementById('box4').innerHTML,
-		id: "#box4"
-	}
-
-	var e = {
-		letter: document.getElementById('box5').innerHTML,
-		id: "#box5"
-	}
-
-	var f = {
-		letter: document.getElementById('box6').innerHTML,
-		id: "#box6"
-	}
-
-	var g = {
-		letter: document.getElementById('box7').innerHTML,
-		id: "#box7"
-	}
-
-	var h = {
-		letter: document.getElementById('box8').innerHTML,
-		id: "#box8"
-	}
-
-	var i = {
-		letter: document.getElementById('box9').innerHTML,
-		id: "#box9"
-	}
-
 	if (counter > 4) {
-		completeRow(a.letter, b.letter, c.letter, a.id, b.id, c.id);
-		completeRow(d.letter, e.letter, f.letter, d.id, e.id, f.id);
-		completeRow(g.letter, h.letter, i.letter, g.id, h.id, i.id);   
-		completeRow(a.letter, d.letter, g.letter, a.id, d.id, g.id);
-		completeRow(b.letter, e.letter, h.letter, b.id, e.id, h.id);
-		completeRow(c.letter, f.letter, i.letter, c.id, f.id, i.id);
-		completeRow(a.letter, e.letter, i.letter, a.id, e.id, i.id);
-		completeRow(c.letter, e.letter, g.letter, c.id, e.id, g.id);
+		completeRow(boxes[0].innerHTML, boxes[1].innerHTML, boxes[2].innerHTML, boxes[0].id, boxes[1].id, boxes[2].id);
+
+		completeRow(boxes[3].innerHTML, boxes[4].innerHTML, boxes[5].innerHTML, boxes[3].id, boxes[4].id, boxes[5].id);
+
+		completeRow(boxes[6].innerHTML, boxes[7].innerHTML, boxes[8].innerHTML, boxes[6].id, boxes[7].id, boxes[8].id);
+
+		completeRow(boxes[0].innerHTML, boxes[3].innerHTML, boxes[6].innerHTML, boxes[0].id, boxes[3].id, boxes[6].id);
+
+		completeRow(boxes[1].innerHTML, boxes[4].innerHTML, boxes[7].innerHTML, boxes[1].id, boxes[4].id, boxes[7].id);
+
+		completeRow(boxes[2].innerHTML, boxes[5].innerHTML, boxes[8].innerHTML, boxes[2].id, boxes[5].id, boxes[8].id);
+
+		completeRow(boxes[0].innerHTML, boxes[4].innerHTML, boxes[8].innerHTML, boxes[0].id, boxes[4].id, boxes[8].id);
+
+		completeRow(boxes[2].innerHTML, boxes[4].innerHTML, boxes[6].innerHTML, boxes[2].id, boxes[4].id, boxes[6].id);
 	}
 
 	if ((counter == 9) && (gameOver == false)) {
 		gameOver = true;
+
 		messageDiv.style.display = 'block';
+
 		theMessage.innerHTML = "Cat's Game!";
+
 		title.style.display = 'none';
 	}
 }
 
 function checkSpace(event) {
 	var clickedBoxId = event.srcElement.id;
+
 	var clickedBoxLetter = event.srcElement.innerHTML;
 
 	if (gameOver == false) {
@@ -91,7 +59,7 @@ function checkSpace(event) {
 				checkForWin();
 			}, 800);
 
-			changeUser();
+			userLetter === "X" ? userLetter = "O" : userLetter = "X";
 		}
 		else {
 			alert('This space is taken. Try another!');
@@ -105,12 +73,19 @@ function checkSpace(event) {
 function completeRow(x, y, z, k, l, m) { 
 	if ((x.length == 1) && (x == y) && (x == z)) {
 		gameOver = true;
+
 		title.style.display = 'none';
+
 		messageDiv.style.display = 'block';
+
 		play2();
-		document.querySelector(k).style.color = '#FF880D';
-		document.querySelector(l).style.color = '#FF880D';
-		document.querySelector(m).style.color = '#FF880D';
+
+		document.getElementById(k).style.color = '#FF880D';
+
+		document.getElementById(l).style.color = '#FF880D';
+
+		document.getElementById(m).style.color = '#FF880D';
+
 		theMessage.innerHTML = x + " wins!";
 	}
 
@@ -121,26 +96,35 @@ function completeRow(x, y, z, k, l, m) {
 
 function play() {
 	var audio = document.getElementById("audio");
+
 	audio.play();
 }
 
 function play2() {
 	var audio = document.getElementById("audio2");
+
 	audio.play()
 }
 
 function resetGame() {
 	counter = 0;
+
 	gameOver = false;
+
 	messageDiv.style.display = 'none';
+
 	title.style.display = 'block';
+
 	userLetter = "X";
 
 	// empty boxes and reset color to white
 	for (item = 1; item <= 9; item++) {
 		var theBoxId = "box" + item;
+
 		var theBox = document.getElementById(theBoxId);
+
 		theBox.innerHTML = "";
+
 		theBox.style.color = "#FFF";
 	}
 }
