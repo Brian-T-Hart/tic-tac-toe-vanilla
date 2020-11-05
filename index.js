@@ -1,3 +1,19 @@
+//make sure sw are supported
+if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+			.register('/sw_cached_site.js')
+            .then(console.log('Servicewroker registered'))
+            .catch(err => console.log(`ServiceWorker error: ${err}`));
+    });
+}//if SW
+
+else {
+    console.log('serviceWorker not in navigator');
+}
+
+// tic-tac-toe logic
+
 var boxes = document.getElementsByClassName('box');
 
 var counter = 0;
