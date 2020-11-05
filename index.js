@@ -2,7 +2,7 @@
 if('serviceWorker' in navigator){
     window.addEventListener('load', () => {
         navigator.serviceWorker
-			.register('/tic-tac-toe-vanilla/sw_cached_site.js/')
+			.register('/tic-tac-toe-vanilla/sw_cached_site.js', {scope: '/tic-tac-toe-vanilla/'})
             .then(console.log('Servicewroker registered'))
             .catch(err => console.log(`ServiceWorker error: ${err}`));
     });
