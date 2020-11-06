@@ -1,4 +1,5 @@
-const cacheName = 'tic-tac-toe';
+const cacheVersion = 'v1';
+const cacheName = `${registration.scope}!${cacheVersion}`;
 
 //Call install event
 self.addEventListener('install', (e)=>{
@@ -12,7 +13,7 @@ self.addEventListener('activate', (e)=>{
         caches.keys().then(cacheNames =>{
             return Promise.all(
                 cacheNames.map(cache => {
-                    if(cache !== cacheName){
+                    if(cache.startsWith(`${registration.scope}!`) && cache !== cacheName){
                         console.log('SW cleanup');
                         return caches.delete(cache);
                     }//if
